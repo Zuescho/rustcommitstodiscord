@@ -70,4 +70,4 @@ Once the configuration is complete, you can start the bot by running the `bot.py
 python bot.py
 ```
 
-The script will start running in your terminal, logging its status and sending a notification to your Discord server whenever a new Rust commit is published.
+The script will start running in your terminal, logging its status and sending a notification to your Discord server whenever a new Rust commit is published. 2
