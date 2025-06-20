@@ -23,4 +23,3 @@ env/
 Thumbs.db
 
 # From your original .gitignore file
-*.png
