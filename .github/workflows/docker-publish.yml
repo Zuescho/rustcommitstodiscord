@@ -1,6 +1,5 @@
 name: Build and Publish Docker Image to GHCR
 
-# This action runs on every push to the main branch
 on:
   push:
     branches: [ "main" ]
@@ -8,7 +7,6 @@ on:
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
-    # Sets permissions for the GITHUB_TOKEN for authentication with GHCR
     permissions:
       contents: read
       packages: write
@@ -24,9 +22,16 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # This step converts the full repository path to lowercase
+      - name: Convert repository name to lowercase
+        id: string
+        run: echo "repo=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
+      # This step now uses the fully lowercase name for the tag
       - name: Build and push Docker image
+        id: build-and-push
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ghcr.io/${{ steps.string.outputs.repo }}:latest
