@@ -1,2 +1,26 @@
+# Environment variables
+# Never commit your secrets!
+.env
 
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+# If you create a virtual environment in your project folder
+venv/
+env/
+.venv/
+
+# IDE and editor configuration
+.vscode/
+.idea/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# From your original .gitignore file
 *.png
