@@ -1,73 +1,53 @@
+
 # RustCommitsToDiscord
 
-A reliable Python bot that monitors the official [Facepunch Rust Commits page](https://commits.facepunch.com/r/rust_reboot) and sends detailed notifications for new commits directly to your Discord server using webhooks.
+A reliable, containerized Python bot that monitors the official [Facepunch Rust Commits page](https://commits.facepunch.com/r/rust_reboot) and sends detailed notifications for new commits directly to your Discord server using webhooks.
 
-This script runs continuously, checking for updates at a set interval, and provides styled, embedded messages for new commits, making it easy to keep track of Rust development in real-time.
+This project is a heavily modified fork of the original script by GloftOfficial, rebuilt with modern practices for security, robustness, and ease of deployment using Docker and GitHub Actions.
+
+## Key Improvements from the Original
+
+This fork includes several significant enhancements over the original script:
+
+  * **Containerized with Docker:** The entire application is containerized, ensuring a consistent and isolated environment.
+  * **Automated Builds:** A GitHub Actions workflow automatically builds the Docker image and pushes it to the GitHub Container Registry (GHCR) on every update.
+  * **Secure Configuration:** The hardcoded Discord webhook URL has been removed. The bot now securely loads the webhook from an environment variable, which is ideal for Docker deployments.
+  * **Robust Logging:** Implements proper logging with timestamps and severity levels, making it much easier to monitor the bot's status and troubleshoot issues.
+  * **Improved Error Handling:** More specific exception handling prevents the bot from crashing silently and provides better insight into potential problems.
+  * **Refactored Code:** The codebase has been structured into functions for better readability, maintainability, and scalability.
+  * **Modernized Parsing:** HTML parsing logic has been made more resilient to potential changes on the source website.
 
 ## Features
 
   * **Real-time Commit Monitoring**: Checks for new Rust commits every 50 seconds.
   * **Detailed Discord Notifications**: Sends rich, embedded messages to a Discord webhook.
-  * **Secure Configuration**: Keeps your Discord webhook URL safe by loading it from a `.env` file instead of hardcoding it.
-  * **Robust Logging**: Implements logging for easier troubleshooting and monitoring of the bot's status.
-  * **Clean and Structured Code**: The script is refactored into functions for better readability and maintenance.
   * **Parses Rich Information**: Extracts and displays the author, repository, branch, changeset, commit message, and author's avatar for each commit.
 
-## Example Output
+## Installation on Unraid
 
-When a new commit is detected, a message similar to the following will be posted in your configured Discord channel:
+This bot is designed to be deployed easily on Unraid using its Docker image from the GitHub Container Registry (GHCR).
 
-The embed includes:
+**1. Clone This Repository (Optional)**
 
-  * The author's name, linked to the commit page.
-  * The repository, branch, and changeset information.
-  * The full commit message.
-  * The author's avatar as a thumbnail.
-
-## Prerequisites
-
-  * Python 3.7+
-  * A Discord server where you have permissions to create and manage webhooks.
-
-## Installation & Configuration
-
-Follow these steps to get the bot up and running.
-
-**1. Clone the Repository**
+You only need to clone this repository if you want to make your own modifications. The deployment process uses the pre-built image from the "Packages" section of this GitHub repository.
 
 ```bash
-git clone https://github.com/GloftOfficial/RustCommitsToDiscord
-cd RustCommitsToDiscord
+git clone https://github.com/Zuescho/rustcommitstodiscord
 ```
 
-**2. Create a Discord Webhook**
+**2. Configure Unraid for GHCR**
 
-a. In your Discord server, go to **Server Settings \> Integrations**.
-b. Click on **Webhooks \> New Webhook**.
-c. Give the webhook a name (e.g., "Rust Commits"), choose the desired channel, and copy the **Webhook URL**.
+If you haven't already, you need to configure Unraid to be able to pull images from the GitHub Container Registry. See the instructions in [this guide's "Step 2"](https://www.google.com/search?q=https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry%23authenticating-with-a-personal-access-token-classic) for creating a Personal Access Token (PAT) and adding it to Unraid's Docker registries.
 
-**3. Install Dependencies**
+**3. Deploy the Container on Unraid**
 
-Install all the required Python packages using the `requirements.txt` file.
-
-```bash
-pip install -r requirements.txt
-```
-
-**4. Configure the Webhook URL**
-
-a. Create a new file in the project directory named `.env`.
-
-b. Open the `.env` file and add your webhook URL in the following format:
-`DISCORD_WEBHOOK_URL="YOUR_WEBHOOK_URL_HERE"`
-Replace `YOUR_WEBHOOK_URL_HERE` with the URL you copied from Discord.
-
-## Usage
-
-Once the configuration is complete, you can start the bot by running the `bot.py` script.
-
-```bash
-python bot.py
-```
-
-The script will start running in your terminal, logging its status and sending a notification to your Discord server whenever a new Rust commit is published. 2
+  * Go to the **Docker** tab in your Unraid dashboard and click **Add Container**.
+  * In the **Repository** field, enter the path to the image from this repository:
+    `ghcr.io/zuescho/rustcommitstodiscord:latest`
+  * Click **Add another Path, Port, Variable, Label or Device** and add the following environment variable:
+      * **Config Type:** `Variable`
+      * **Key:** `DISCORD_WEBHOOK_URL`
+      * **Value:** Paste your actual Discord webhook URL here.
+  * **Optional:** To add the logo, paste the following URL into the **Icon URL** field:
+    `https://raw.githubusercontent.com/Zuescho/rustcommitstodiscord/main/logo.png`
+  * Click **Apply** to start the container. The bot will now be running and monitoring for new commits.
