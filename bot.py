@@ -23,10 +23,35 @@ POLL_INTERVAL_SECONDS = 50
 # The bot will only post commits containing at least one of these keywords.
 # The search is case-insensitive.
 KEYWORDS = {
-    "blocker", "wire", "automated", "turret", "powered", "generator", 
-    "electric", "timer", "computer station", "industrial", "turbine", 
-    "drone", "hbhf", "cctv", "conveyor", "fluid", "battery", "autoturret", 
-    "laser detector", "storage monitor", "rust+", "pipes", "seismic"
+    "and switch", "audio alarm", "auto turret", "autoturret", "automated",
+    "battery", "blocker", "boom box", "boomer", "button", "cable tunnel", "cctv",
+    "cctv camera", "ceiling light", "champagne boomer", "computer station",
+    "connected speaker", "conveyor", "counter", "deluxe christmas lights",
+    "disco ball", "disco floor", "door controller", "drone", "electric",
+    "electric furnace", "electric heater", "electrical branch", "elevator",
+    "flasher light", "fluid", "fluid combiner", "fluid splitter",
+    "fluid switch & pump", "fogger-3000", "fuel tank vehicle module",
+    "generator", "green industrial light", "hammer", "hbhf", "hbhf sensor",
+    "horizontal weapon rack", "hose tool", "igniter", "industrial",
+    "industrial combiner", "industrial conveyor", "industrial crafter",
+    "industrial splitter", "industrial wall light", "large animated neon sign",
+    "large battery", "large neon sign", "large solar panel",
+    "large water catcher", "laser detector", "laser light", "memory cell",
+    "medium animated neon sign", "medium neon sign",
+    "medium rechargeable battery", "microphone stand", "modular car lift",
+    "or switch", "pattern boomer", "pipe tool", "pipes", "powered",
+    "powered water purifier", "pressure pad", "ptz cctv camera", "rand switch",
+    "reactive target", "red industrial light", "rf broadcaster", "rf pager",
+    "rf receiver", "rf transmitter", "roman candle", "root combiner", "rust+",
+    "sam site", "search light", "seismic", "simple light", "siren light",
+    "small generator", "small neon sign", "small rechargeable battery",
+    "small water catcher", "smart alarm", "smart switch", "snow machine",
+    "sound light", "spooky speaker", "splitter", "sprinkler",
+    "storage adapter", "storage monitor", "strobe light", "switch",
+    "tall weapon rack", "telephone", "tesla coil", "test generator",
+    "timed explosive charge", "timer", "turbine", "turret", "volcano firework",
+    "water barrel", "water pump", "wide weapon rack", "wind turbine", "wire",
+    "wire tool", "xor switch"
 }
 
 
